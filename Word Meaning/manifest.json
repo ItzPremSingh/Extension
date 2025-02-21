@@ -1,21 +1,23 @@
 {
   "manifest_version": 2,
   "name": "Word Meaning",
-  "version": "1.0",
+  "version": "2.0",
   "description": "Show word meanings on double click.",
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "https://api.dictionaryapi.dev/*"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["content.js"],
-      "css": ["styles.css"]
+      "css": ["styles/styles.css"]
     }
   ],
   "icons": {
-    "48": "icon.png"
-  },
-  "permissions": [
-    "https://api.dictionaryapi.dev/*"
-  ]
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "64": "icons/icon-64.png",
+    "128": "icons/icon-128.png",
+    "256": "icons/icon-256.png",
+    "512": "icons/icon-512.png"
+  }
 }
-

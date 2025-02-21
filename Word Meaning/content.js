@@ -1,23 +1,29 @@
-// Static unique identifier suffix
-const suffix = "asdfkla45fsa";
+/**
+ * Ultimate Popup v2.0 - Smooth & Modern Word Meaning Popup
+ * Author: Prem Singh
+ */
 
-// Dynamically create the popup HTML structure
+const suffix = "f3g7h2j9k1";
+
+/**
+ * Creates the popup dynamically and appends it to the DOM.
+ */
 function createPopup() {
   const popup = document.createElement("div");
   popup.id = `popup-${suffix}`;
-  popup.classList.add(`popup-${suffix}`);
+  popup.classList.add(`popup-${suffix}`, `popup-container-${suffix}`);
 
   const popupContent = document.createElement("div");
-  popupContent.classList.add(`popup-content-${suffix}`);
+  popupContent.classList.add(`popup-content-${suffix}`, `popup-box-${suffix}`);
+
+  const closeBtn = document.createElement("span");
+  closeBtn.classList.add(`close-btn-${suffix}`);
+  closeBtn.innerHTML = "&#10006;";
+  closeBtn.onclick = closePopup;
 
   const wordTitle = document.createElement("h3");
   wordTitle.id = `wordTitle-${suffix}`;
   wordTitle.classList.add(`word-title-${suffix}`);
-
-  const closeBtn = document.createElement("span");
-  closeBtn.classList.add(`close-btn-${suffix}`);
-  closeBtn.innerText = "×";
-  closeBtn.onclick = closePopup;
 
   const loading = document.createElement("div");
   loading.id = `loading-${suffix}`;
@@ -35,38 +41,39 @@ function createPopup() {
   errorMessage.id = `errorMessage-${suffix}`;
   errorMessage.classList.add(`error-content-${suffix}`);
 
-  // Append elements to popupContent
-  popupContent.appendChild(wordTitle);
-  popupContent.appendChild(closeBtn);
-  popupContent.appendChild(loading);
-  popupContent.appendChild(meaning);
-  popupContent.appendChild(example);
-  popupContent.appendChild(errorMessage);
-
-  // Append popupContent to popup
+  // Append all elements to popupContent
+  popupContent.append(
+    closeBtn,
+    wordTitle,
+    loading,
+    meaning,
+    example,
+    errorMessage
+  );
   popup.appendChild(popupContent);
-
-  // Append popup to the body
   document.body.appendChild(popup);
 }
 
-// Close the popup
+/**
+ * Closes and removes the popup from the DOM.
+ */
 function closePopup() {
   const popup = document.getElementById(`popup-${suffix}`);
-  popup.classList.remove(`popup-${suffix}-show`);
-  document.body.removeChild(popup); // Remove the popup from the body
+  if (popup) {
+    popup.remove();
+  }
 }
 
-// Add event listener for double-click
+/**
+ * Handles the double-click event to fetch word definitions.
+ */
 window.addEventListener("dblclick", function () {
   let selectedText = window.getSelection().toString().trim();
   if (!selectedText) return;
 
   selectedText = selectedText.toLowerCase();
-
   let popup = document.getElementById(`popup-${suffix}`);
 
-  // If popup doesn't exist, create it
   if (!popup) {
     createPopup();
     popup = document.getElementById(`popup-${suffix}`);
@@ -78,17 +85,17 @@ window.addEventListener("dblclick", function () {
   const loading = document.getElementById(`loading-${suffix}`);
   const errorMessage = document.getElementById(`errorMessage-${suffix}`);
 
-  // Clear previous content
+  // Reset previous content
   meaning.innerText = "";
   example.innerText = "";
   errorMessage.innerText = "";
 
-  // Show loading animation and prepare the popup
+  // Update UI with selected word
   wordTitle.innerText = selectedText;
   loading.style.display = "block";
-  popup.classList.add(`popup-${suffix}-show`);
+  popup.classList.add(`popup-show-${suffix}`);
 
-  // Check if the user is online
+  // Handle offline case
   if (!navigator.onLine) {
     loading.style.display = "none";
     errorMessage.innerText = "No Internet Connection!";
@@ -96,14 +103,13 @@ window.addEventListener("dblclick", function () {
     return;
   }
 
-  // Fetch the word meaning from the API
+  // Fetch word meaning from API
   fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${selectedText}`)
     .then((response) => response.json())
     .then((data) => {
-      loading.style.display = "none"; // Hide loading animation
+      loading.style.display = "none";
       if (data.title) {
-        meaning.innerText = "Word not found.";
-        example.innerText = "-";
+        meaning.innerText = "Error: Word not found.";
       } else {
         meaning.innerText = data[0].meanings[0].definitions[0].definition;
         example.innerText = data[0].meanings[0].definitions[0].example
@@ -117,11 +123,4 @@ window.addEventListener("dblclick", function () {
       errorMessage.style.display = "block";
       console.error(error);
     });
-});
-
-// Create the popup when the DOM is loaded, only once
-document.addEventListener("DOMContentLoaded", function () {
-  if (!document.getElementById(`popup-${suffix}`)) {
-    createPopup();
-  }
 });
