@@ -1,9 +1,8 @@
 /**
- * Ultimate Popup v2.0 - Smooth & Modern Word Meaning Popup
+ * Ultimate Popup v2.1 - Smooth & Modern Word Meaning Popup
  * Author: Prem Singh
  */
 
-/* Default (Light Theme) */
 :root {
   --popup-bg-f3g7h2j9k1: rgba(0, 0, 0, 0.7);
   --popup-box-bg-f3g7h2j9k1: #fff;
@@ -13,7 +12,6 @@
   --animation-duration-f3g7h2j9k1: 0.3s;
 }
 
-/* Dark Theme */
 @media (prefers-color-scheme: dark) {
   :root {
     --popup-bg-f3g7h2j9k1: rgba(0, 0, 0, 0.85);
@@ -24,7 +22,6 @@
   }
 }
 
-/* Popup Overlay */
 .popup-f3g7h2j9k1 {
   position: fixed;
   top: 0;
@@ -42,7 +39,6 @@
     visibility var(--animation-duration-f3g7h2j9k1) ease-in-out;
 }
 
-/* Popup Box */
 .popup-box-f3g7h2j9k1 {
   background: var(--popup-box-bg-f3g7h2j9k1);
   width: 350px;
@@ -56,7 +52,6 @@
   text-align: center;
 }
 
-/* Show Popup */
 .popup-show-f3g7h2j9k1 {
   opacity: 1;
   visibility: visible;
@@ -66,7 +61,6 @@
   transform: scale(1);
 }
 
-/* Close Button */
 .close-btn-f3g7h2j9k1 {
   position: absolute;
   top: 12px;
@@ -82,7 +76,6 @@
   transform: rotate(90deg);
 }
 
-/* Word Title */
 .word-title-f3g7h2j9k1 {
   font-size: 20px;
   font-weight: bold;
@@ -90,7 +83,6 @@
   color: var(--highlight-color-f3g7h2j9k1);
 }
 
-/* Loading Animation */
 .loading-f3g7h2j9k1 {
   width: 25px;
   height: 25px;
@@ -101,14 +93,12 @@
   animation: spin-f3g7h2j9k1 1s linear infinite;
 }
 
-/* Word Meaning */
 .popup-info-f3g7h2j9k1 {
   font-size: 16px;
   color: var(--text-color-f3g7h2j9k1);
   margin-top: 10px;
 }
 
-/* Error Message */
 .error-content-f3g7h2j9k1 {
   font-size: 14px;
   color: var(--error-color-f3g7h2j9k1);
@@ -116,7 +106,6 @@
   margin-top: 10px;
 }
 
-/* Animations */
 @keyframes spin-f3g7h2j9k1 {
   0% {
     transform: rotate(0deg);
